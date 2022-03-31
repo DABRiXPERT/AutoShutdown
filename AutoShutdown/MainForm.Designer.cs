@@ -39,6 +39,8 @@
             this.timeDisplay = new System.Windows.Forms.Label();
             this.timerForDateTime = new System.Windows.Forms.Timer(this.components);
             this.timerForCountdown = new System.Windows.Forms.Timer(this.components);
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.checkBackgroundSession = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // label1
@@ -74,7 +76,7 @@
             this.countdown.Name = "countdown";
             this.countdown.Size = new System.Drawing.Size(450, 20);
             this.countdown.TabIndex = 2;
-            this.countdown.Text = "這部裝置將在　ＸＸ時ＸＸ分ＸＸ秒　後關閉。";
+            this.countdown.Text = "這部裝置將在　－－時－－分－－秒　後關閉。";
             // 
             // save
             // 
@@ -125,7 +127,7 @@
             this.timeDisplay.Name = "timeDisplay";
             this.timeDisplay.Size = new System.Drawing.Size(399, 20);
             this.timeDisplay.TabIndex = 6;
-            this.timeDisplay.Text = "現在時間：20XX年XX月XX日 XX時XX分XX秒。";
+            this.timeDisplay.Text = "現在時間：20--年--月--日 --時--分--秒。";
             // 
             // timerForDateTime
             // 
@@ -137,6 +139,16 @@
             // 
             this.timerForCountdown.Interval = 20;
             this.timerForCountdown.Tick += new System.EventHandler(this.timerForCountdown_Tick);
+            // 
+            // notifyIcon
+            // 
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+            this.notifyIcon.Text = "notifyIcon";
+            this.notifyIcon.Visible = true;
+            // 
+            // checkBackgroundSession
+            // 
+            this.checkBackgroundSession.Interval = 20;
             // 
             // MainForm
             // 
@@ -154,7 +166,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
-            this.Text = "自動關機程式 ver: 1.0";
+            this.Text = "自動關機程式 ver: 1.05";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -171,6 +184,8 @@
         private System.Windows.Forms.Label timeDisplay;
         private System.Windows.Forms.Timer timerForDateTime;
         private System.Windows.Forms.Timer timerForCountdown;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
+        private System.Windows.Forms.Timer checkBackgroundSession;
     }
 }
 

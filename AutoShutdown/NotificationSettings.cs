@@ -7,7 +7,7 @@ namespace AutoShutdown
     {
         public void setNotificationStage(int notificationSetting, int duration_int, int notify_stage)
         {
-            // Will be Implement in the Next Update!
+            // Will be Implement in the Next Update!(But not this update!)
         }
     }
 }

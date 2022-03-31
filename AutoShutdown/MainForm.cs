@@ -10,6 +10,7 @@ namespace AutoShutdown
         public DateTime shutdownTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
         public static int notificationSetting = 1;
         int duration_int, notify_stage;
+        bool exitAlready = false;
         //public bool notificated = false;
         public MainForm()
         {
@@ -44,6 +45,7 @@ namespace AutoShutdown
             for (int i = 0; i < duration_char.Length; i++)
                 duration_char[i] += Convert.ToChar(65248);
             countdown.Text = "這部裝置將在　"+duration_char[0]+duration_char[1]+"時"+duration_char[2]+duration_char[3]+"分"+duration_char[4]+duration_char[5]+"秒　後關閉。";
+            duration_int = Convert.ToInt32(duration.TotalSeconds);
             if (DateTime.Now > shutdownTime /*&& notificated == false*/)
             {
                 //notificated = true;
@@ -52,10 +54,11 @@ namespace AutoShutdown
                 //{  
                     //notificated = false;
                     shutdownTime = shutdownTime.AddDays(1);
-                    Process.Start("shutdown", "/s /t 0");
                 //}
             }
-            duration_int = Convert.ToInt32(duration.TotalSeconds);
+
+
+
             if (notificationSetting == 1)
             {
                 if (duration_int == 7200 && notify_stage == 0)
@@ -324,7 +327,7 @@ namespace AutoShutdown
             {
                 shutdownTime = shutdownTime.AddDays(1);
             }
-            int duration_int = Convert.ToInt32(shutdownTime.Subtract(DateTime.Now).TotalSeconds);
+            duration_int = Convert.ToInt32(shutdownTime.Subtract(DateTime.Now).TotalSeconds);
             if (duration_int >= 7200)
                 notify_stage = 0;
             else if (duration_int >= 3600)
@@ -360,14 +363,54 @@ namespace AutoShutdown
             else
                 notify_stage = 0;
 
+            Process.Start("shutdown", "/s /t " + duration_int);
             MessageBox.Show("已儲存設定！", "設定生效", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void reject_Click(object sender, EventArgs e)
         {
-            Close();
+            if (MessageBox.Show("確定要取消設定嗎？", "撤銷設定", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Process.Start("shutdown", "/a");
+                timerForCountdown.Stop();
+                timerForCountdown.Enabled = false;
+                countdown.Text = "這部裝置將在　－－時－－分－－秒　後關閉。";
+                MessageBox.Show("已撤銷原先設定！", "設定生效", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (exitAlready == false)
+            {
+                DialogResult result = MessageBox.Show("你確定要退出嗎？\n所有的設定將被撤銷！", "退出程式", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    Process.Start("shutdown", "/a");
+                    exitAlready = true;
+                    Application.Exit();
+                }
+            }
+            /*
+            if (WindowState == FormWindowState.Minimized)
+            {
+                e.Cancel = true;
+                Hide();
+                ShowInTaskbar = false;
+                WindowState = FormWindowState.Minimized;
+                notifyIcon.BalloonTipTitle = "繼續執行關機排程";
+                notifyIcon.BalloonTipText = "繼續執行事先預訂的關機程序，\n如果要取消請按這個標誌";
+                notifyIcon.BalloonTipIcon = ToolTipIcon.Info;
+                notifyIcon.ShowBalloonTip(3000);
+            }    
+            */
+        }
+
+        private void notifyIcon_onDoubleClick(object sender, MouseEventArgs e)
+        {
+           Show();
+           WindowState = FormWindowState.Normal;
+        }
         private void settings_Click(object sender, EventArgs e)
         {
             SettingForm settingForm = new SettingForm(notificationSetting);

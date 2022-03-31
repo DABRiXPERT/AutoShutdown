@@ -38,11 +38,15 @@
             this.byMessageBox = new System.Windows.Forms.RadioButton();
             this.byNotification = new System.Windows.Forms.RadioButton();
             this.exitWithoutChanges = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.passwordSetting = new System.Windows.Forms.GroupBox();
+            this.passwordTextBox = new System.Windows.Forms.TextBox();
+            this.onClosing = new System.Windows.Forms.GroupBox();
+            this.justClose = new System.Windows.Forms.RadioButton();
+            this.toSystemTray = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.notificationSetupGroup.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.passwordSetting.SuspendLayout();
+            this.onClosing.SuspendLayout();
             this.SuspendLayout();
             // 
             // saveOnExit
@@ -62,9 +66,9 @@
             this.info.Location = new System.Drawing.Point(13, 219);
             this.info.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.info.Name = "info";
-            this.info.Size = new System.Drawing.Size(245, 39);
+            this.info.Size = new System.Drawing.Size(252, 39);
             this.info.TabIndex = 1;
-            this.info.Text = "自動關機程式 版本 1.0 (2022/03/13)\r\n(C) DABRiXPERT 2022\r\n\r\n";
+            this.info.Text = "自動關機程式 版本 1.05 (2022/03/31)\r\n(C) DABRiXPERT 2022\r\n\r\n";
             // 
             // pictureBox1
             // 
@@ -142,32 +146,67 @@
             this.exitWithoutChanges.UseVisualStyleBackColor = true;
             this.exitWithoutChanges.Click += new System.EventHandler(this.exitWithoutChanges_Click);
             // 
-            // groupBox1
+            // passwordSetting
             // 
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Enabled = false;
-            this.groupBox1.Location = new System.Drawing.Point(12, 59);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(360, 41);
-            this.groupBox1.TabIndex = 5;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "密碼(待下次更新使用)";
+            this.passwordSetting.Controls.Add(this.passwordTextBox);
+            this.passwordSetting.Enabled = false;
+            this.passwordSetting.Location = new System.Drawing.Point(12, 59);
+            this.passwordSetting.Name = "passwordSetting";
+            this.passwordSetting.Size = new System.Drawing.Size(360, 41);
+            this.passwordSetting.TabIndex = 5;
+            this.passwordSetting.TabStop = false;
+            this.passwordSetting.Text = "密碼(沒錯我又拖更了)";
             // 
-            // textBox1
+            // passwordTextBox
             // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(6, 15);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.PasswordChar = '*';
-            this.textBox1.Size = new System.Drawing.Size(348, 20);
-            this.textBox1.TabIndex = 0;
+            this.passwordTextBox.Enabled = false;
+            this.passwordTextBox.Location = new System.Drawing.Point(6, 15);
+            this.passwordTextBox.Name = "passwordTextBox";
+            this.passwordTextBox.PasswordChar = '*';
+            this.passwordTextBox.Size = new System.Drawing.Size(348, 20);
+            this.passwordTextBox.TabIndex = 0;
+            // 
+            // onClosing
+            // 
+            this.onClosing.Controls.Add(this.justClose);
+            this.onClosing.Controls.Add(this.toSystemTray);
+            this.onClosing.Enabled = false;
+            this.onClosing.Location = new System.Drawing.Point(12, 106);
+            this.onClosing.Name = "onClosing";
+            this.onClosing.Size = new System.Drawing.Size(360, 41);
+            this.onClosing.TabIndex = 5;
+            this.onClosing.TabStop = false;
+            this.onClosing.Text = "關閉視窗(下次再說)";
+            // 
+            // justClose
+            // 
+            this.justClose.AutoSize = true;
+            this.justClose.Location = new System.Drawing.Point(135, 19);
+            this.justClose.Name = "justClose";
+            this.justClose.Size = new System.Drawing.Size(137, 17);
+            this.justClose.TabIndex = 1;
+            this.justClose.Text = "徹底結束程式運行";
+            this.justClose.UseVisualStyleBackColor = true;
+            // 
+            // toSystemTray
+            // 
+            this.toSystemTray.AutoSize = true;
+            this.toSystemTray.Checked = true;
+            this.toSystemTray.Location = new System.Drawing.Point(6, 18);
+            this.toSystemTray.Name = "toSystemTray";
+            this.toSystemTray.Size = new System.Drawing.Size(123, 17);
+            this.toSystemTray.TabIndex = 0;
+            this.toSystemTray.TabStop = true;
+            this.toSystemTray.Text = "縮小視系統欄內";
+            this.toSystemTray.UseVisualStyleBackColor = true;
             // 
             // SettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 361);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.onClosing);
+            this.Controls.Add(this.passwordSetting);
             this.Controls.Add(this.exitWithoutChanges);
             this.Controls.Add(this.notificationSetupGroup);
             this.Controls.Add(this.githubLink);
@@ -179,11 +218,14 @@
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "SettingForm";
             this.Text = "設定";
+            this.Load += new System.EventHandler(this.SettingForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.notificationSetupGroup.ResumeLayout(false);
             this.notificationSetupGroup.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.passwordSetting.ResumeLayout(false);
+            this.passwordSetting.PerformLayout();
+            this.onClosing.ResumeLayout(false);
+            this.onClosing.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -200,7 +242,10 @@
         private System.Windows.Forms.RadioButton byNotification;
         private System.Windows.Forms.RadioButton byNothing;
         private System.Windows.Forms.Button exitWithoutChanges;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.GroupBox passwordSetting;
+        private System.Windows.Forms.TextBox passwordTextBox;
+        private System.Windows.Forms.GroupBox onClosing;
+        private System.Windows.Forms.RadioButton justClose;
+        private System.Windows.Forms.RadioButton toSystemTray;
     }
 }

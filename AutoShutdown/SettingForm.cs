@@ -38,5 +38,9 @@ namespace AutoShutdown
             System.Diagnostics.Process.Start("https://github.com/DABRiXPERT");
         }
 
+        private void SettingForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
