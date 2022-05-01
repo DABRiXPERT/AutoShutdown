@@ -68,7 +68,7 @@
             this.info.Name = "info";
             this.info.Size = new System.Drawing.Size(252, 39);
             this.info.TabIndex = 1;
-            this.info.Text = "自動關機程式 版本 1.05 (2022/03/31)\r\n(C) DABRiXPERT 2022\r\n\r\n";
+            this.info.Text = "自動關機程式 版本 1.06 (2022/04/22)\r\n(C) DABRiXPERT 2022\r\n\r\n";
             // 
             // pictureBox1
             // 
@@ -85,10 +85,10 @@
             this.githubLink.AutoSize = true;
             this.githubLink.Location = new System.Drawing.Point(13, 258);
             this.githubLink.Name = "githubLink";
-            this.githubLink.Size = new System.Drawing.Size(210, 13);
+            this.githubLink.Size = new System.Drawing.Size(245, 13);
             this.githubLink.TabIndex = 3;
             this.githubLink.TabStop = true;
-            this.githubLink.Text = "https://github.com/DABRiXPERT";
+            this.githubLink.Text = "github.com/DABRiXPERT/AutoShutdown";
             this.githubLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.githubLink_LinkClicked);
             // 
             // notificationSetupGroup
@@ -155,7 +155,7 @@
             this.passwordSetting.Size = new System.Drawing.Size(360, 41);
             this.passwordSetting.TabIndex = 5;
             this.passwordSetting.TabStop = false;
-            this.passwordSetting.Text = "密碼(沒錯我又拖更了)";
+            this.passwordSetting.Text = "密碼(未完成)";
             // 
             // passwordTextBox
             // 
@@ -176,7 +176,7 @@
             this.onClosing.Size = new System.Drawing.Size(360, 41);
             this.onClosing.TabIndex = 5;
             this.onClosing.TabStop = false;
-            this.onClosing.Text = "關閉視窗(下次再說)";
+            this.onClosing.Text = "關閉視窗(未完成)";
             // 
             // justClose
             // 

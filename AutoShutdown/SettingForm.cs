@@ -35,7 +35,7 @@ namespace AutoShutdown
         private void githubLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             githubLink.LinkVisited = true;
-            System.Diagnostics.Process.Start("https://github.com/DABRiXPERT");
+            System.Diagnostics.Process.Start("https://github.com/DABRiXPERT/AutoShutdown");
         }
 
         private void SettingForm_Load(object sender, EventArgs e)

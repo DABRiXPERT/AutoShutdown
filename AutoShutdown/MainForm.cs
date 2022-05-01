@@ -10,7 +10,6 @@ namespace AutoShutdown
         public DateTime shutdownTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
         public static int notificationSetting = 1;
         int duration_int, notify_stage;
-        bool exitAlready = false;
         //public bool notificated = false;
         public MainForm()
         {
@@ -319,6 +318,7 @@ namespace AutoShutdown
 
         private void save_Click(object sender, EventArgs e)
         {
+            Process.Start("shutdown", "/a");
             timerForCountdown.Enabled = true;
             shutdownTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
             TimeSpan applyTime = new TimeSpan(timePicker.Value.Hour, timePicker.Value.Minute, 0);
@@ -381,16 +381,13 @@ namespace AutoShutdown
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (exitAlready == false)
+            if (MessageBox.Show("你確定要退出嗎？\n所有的設定將被撤銷！", "退出程式", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
             {
-                DialogResult result = MessageBox.Show("你確定要退出嗎？\n所有的設定將被撤銷！", "退出程式", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result == DialogResult.Yes)
-                {
+                if (timerForCountdown.Enabled)
                     Process.Start("shutdown", "/a");
-                    exitAlready = true;
-                    Application.Exit();
-                }
-            }
+                e.Cancel = true;
+                
+            }   
             /*
             if (WindowState == FormWindowState.Minimized)
             {

@@ -166,7 +166,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
-            this.Text = "自動關機程式 ver: 1.05";
+            this.Text = "自動關機程式 ver: 1.06";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
